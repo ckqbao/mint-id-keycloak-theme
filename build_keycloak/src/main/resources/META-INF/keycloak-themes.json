@@ -1,0 +1,11 @@
+{
+  "themes": [
+    {
+      "name": "Customized-keycloak-theme",
+      "types": [
+        "login",
+        "account"
+      ]
+    }
+  ]
+}
