@@ -1,0 +1,107 @@
+/* 
+If you use global CSS like we do here(not recommended) 
+Be mindful that the CSS of the login theme may clash with the CSS of the account theme in Storybook (and only in storybook).
+This is why I made sure to use .my-root-account-class instead of .my-root-class that is already used in the login theme.
+*/
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Source Sans 3, system-ui, sans-serif";
+  }
+}
+
+@layer components {
+  .ds-btn-primary {
+    color: #FFF;
+  }
+
+  .ds-btn-neutral {
+    color: #978DB2;
+  }
+
+  .kc-btn {
+    @apply h-[34px] min-h-[34px];
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    gap: 10px;
+    mix-blend-mode: normal;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    font-family: "Source Sans Pro";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+  
+    text-align: center;
+    letter-spacing: 0.03em;
+    font-feature-settings: "kern" off;
+  }
+
+  .kc-input {
+    @apply block w-full rounded-md border-0 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px 16px;
+    gap: 16px;
+
+    background: #f0e9e5;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none !important;
+
+    font-family: "Source Sans 3";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.02em;
+    font-feature-settings: "kern" off;
+
+    color: #978db2;
+  }
+  .kc-input-error {
+    @apply ring-2 ring-inset ring-[#F6688E] !important;
+  }
+
+  .kc-input-label {
+    @apply block text-sm font-medium leading-6 text-[#551C77];
+  }
+
+  .kc-page-title {
+    @apply text-2xl font-bold leading-10 text-[#252C30] sm:truncate sm:text-3xl sm:tracking-tight;
+  }
+}
+
+html {
+	font-size: 16px;
+  font-family: "Source Sans 3";
+}
+
+#root {
+	width: 100%;
+}
+
+a:hover {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.my-root-account-class {
+	min-height: 100vh;
+  background: url(./assets/MC-hg-DotsPulpo.png) no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center
+}
