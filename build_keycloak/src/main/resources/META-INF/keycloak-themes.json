@@ -1,10 +1,11 @@
 {
   "themes": [
     {
-      "name": "Customized-keycloak-theme",
+      "name": "MINT-ID",
       "types": [
         "login",
-        "account"
+        "account",
+        "welcome"
       ]
     }
   ]
