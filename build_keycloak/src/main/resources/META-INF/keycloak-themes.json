@@ -4,8 +4,7 @@
       "name": "MINT-ID",
       "types": [
         "login",
-        "account",
-        "welcome"
+        "account"
       ]
     }
   ]
