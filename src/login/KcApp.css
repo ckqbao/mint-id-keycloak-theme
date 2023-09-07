@@ -4,11 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --neutral-200: #D0D5DD
+}
+
 html.login-pf {
 	min-height: 100%;
 	height: auto;
-	background-color: #f0e9e5;
+	background-color: #fff;
   font-family: "Source Sans 3";
+  font-size: 16px;
 }
 
 .my-color {
@@ -25,7 +30,8 @@ html.login-pf {
 
 .my-root-class body {
   min-height: 100vh;
-  background: url(./assets/MC-hg-DotsPulpo.png) no-repeat center center fixed;
+  /* background: url(./assets/MC-hg-DotsPulpo.png) no-repeat center center fixed; */
+  background: white;
   background-size: cover;
   display: flex;
   justify-content: center
@@ -43,6 +49,11 @@ html.login-pf {
   #kc-header-wrapper {
     padding-right: 0;
   }
+}
+
+#kc-header-wrapper {
+  padding-top: 20px;
+  padding-bottom: 0;
 }
 
 .kcFormHeaderClass.login-pf-header {
@@ -77,7 +88,7 @@ html.login-pf {
 
 .kcSignUpClass #kc-registration,
 #back-to-login {
-  color: #551C77;
+  color: #252131;
   font-family: "Source Sans 3";
   font-style: normal;
   font-weight: 400;
@@ -94,7 +105,7 @@ html.login-pf {
 
 .kcSignUpClass #kc-registration .registerLink,
 #back-to-login a {
-  color: #f6688e;
+  color: #252131;
   font-weight: 700;
   text-decoration: underline;
 }
@@ -111,8 +122,9 @@ html.login-pf {
   align-items: flex-start;
   padding: 38px 40px 24px !important;
   gap: 8px;
-  background: #f7f3f1;
+  background: #fff;
   box-shadow: 0px 8px 24px -4px rgba(0, 0, 0, 0.16);
+  border-radius: 20px;
   border-radius: 20px;
 }
 
@@ -147,19 +159,19 @@ html.login-pf {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 8px 20px;
+  padding: 10px 36px;
   gap: 10px;
-  background: #ecdbea !important;
+  background: var(--neutral-200, #D0D5DD) !important;
   mix-blend-mode: normal;
   border-radius: 8px;
   border: none;
   box-shadow: none;
-  color: #978db2 !important;
+  color: #191D23 !important;
   font-family: "Source Sans 3";
   font-style: normal;
   font-weight: 600;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 22px;
 
   text-align: center;
   letter-spacing: 0.03em;
@@ -174,11 +186,10 @@ html.login-pf {
   outline-offset: 0;
 }
 .kcButtonClass.kcButtonPrimaryClass {
-  background: #551c77 !important;
+  background: #252131 !important;
   color: #fff !important;
 }
 
-#kc-login.kcButtonClass,
 #kc-reset-password.kcButtonClass,
 #kc-register.kcButtonClass {
   padding: 8px 40px;
@@ -189,7 +200,7 @@ html.login-pf {
 }
 
 .kcFormGroupErrorClass.has-error .kcInputClass.form-control {
-  border: 2px solid #f6688e;
+  border: 2px solid #EF4444;
   box-shadow: none;
 }
 
@@ -203,24 +214,24 @@ html.login-pf {
 
   max-width: 396px;
 
-  background: #f0e9e5;
+  background: #fff;
   border-radius: 8px;
-  border: none;
+  border: 1px solid #D0D5DD;
   box-shadow: none;
 
   font-family: "Source Sans 3";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 120%;
   letter-spacing: -0.02em;
   font-feature-settings: "kern" off;
 
-  color: #978db2;
+  color: #252131;
 }
 
 .kcInputClass::placeholder {
-  color: #978db2;
+  color: rgba(0, 0, 0, 0.30);
   font-style: normal;
 }
 
@@ -238,7 +249,7 @@ html.login-pf {
   text-decoration-line: underline;
   font-feature-settings: "kern" off;
 
-  color: #f6688e;
+  color: #252131;
 }
 
 .kcFormError {
@@ -255,7 +266,7 @@ html.login-pf {
   letter-spacing: -0.02em;
   font-feature-settings: "kern" off;
 
-  color: #f6688e;
+  color: #EF4444;
 }
 
 #kc-register-form #kc-agreement {
@@ -266,11 +277,12 @@ html.login-pf {
 
 #kc-register-form #kc-agreement input[type="checkbox"] {
   appearance: none;
-  width: 40px;
-  height: 40px;
-  background: #f0e9e5;
-  border-radius: 8px;
-  color: #551c77;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border-radius: 4px;
+  border: 1px solid #D0D5DD;
+  color: var(--neutral-200, #D0D5DD);
   cursor: pointer;
   user-select: none;
   margin: 0;
@@ -278,7 +290,7 @@ html.login-pf {
 
 #kc-register-form #kc-agreement input[type="checkbox"]:checked {
   border-color: transparent;
-  background-color: #551c77;
+  background-color: #252131;
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -321,11 +333,23 @@ html.login-pf {
 }
 
 .kc-link, .kc-link:hover, .login-pf a:hover {
-  color: #f6688e;
+  color: #252131;
   text-decoration: underline;
 }
 
 .kc-link:focus {
   outline: none;
   outline-offset: 0;
+}
+
+.kc-footer-copyright {
+  color: #000;
+  font-kerning: none;
+
+  font-family: "Source Sans 3";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 19.2px */
+  letter-spacing: -0.32px;
 }

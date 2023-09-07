@@ -8,7 +8,7 @@ import type { KcContext } from './kcContext'
 import type { I18n } from './i18n'
 import { lazy, useState } from 'react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon, ExclamationTriangleIcon, InformationCircleIcon, XCircleIcon } from '@heroicons/react/20/solid'
 import Sidebar from './components/Sidebar'
 
 const Header = lazy(() => import('./components/Header'))
@@ -50,14 +50,30 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         <main className="py-10">
           <div className="px-4 sm:px-6 lg:px-8">
             {message !== undefined && (
-              <div className={clsx('rounded-md p-4 mb-5', { 'bg-green-50': message.type === 'success', 'bg-red-50': message.type === 'error' })}>
+              <div
+                className={clsx('rounded-md p-4 mb-5', {
+                  'bg-green-50': message.type === 'success',
+                  'bg-red-50': message.type === 'error',
+                  'bg-blue-50': message.type === 'info',
+                  'bg-yellow-50': message.type === 'warning',
+                })}
+              >
                 <div className="flex">
                   <div className="flex-shrink-0">
                     {message.type === 'success' && <CheckCircleIcon className="h-5 w-5 text-green-400" aria-hidden="true" />}
                     {message.type === 'error' && <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />}
+                    {message.type === 'warning' && <ExclamationTriangleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />}
+                    {message.type === 'info' && <InformationCircleIcon className="h-5 w-5 text-blue-400" aria-hidden="true" />}
                   </div>
                   <div className="ml-3">
-                    <p className={clsx('text-sm font-medium', { 'text-green-800': message.type === 'success', 'text-red-800': message.type === 'error' })}>
+                    <p
+                      className={clsx('text-sm font-medium', {
+                        'text-green-800': message.type === 'success',
+                        'text-red-800': message.type === 'error',
+                        'text-blue-700': message.type === 'info',
+                        'text-yellow-700': message.type === 'warning',
+                      })}
+                    >
                       {message.summary}
                     </p>
                   </div>

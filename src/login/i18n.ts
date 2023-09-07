@@ -19,6 +19,8 @@ export const { useI18n } = createUseI18n({
         registerTermsAgreement: "*Ich erkläre mich mit der Geltung der <a id='terms-of-use'></a> einverstanden.",
         registerPrivacyPolicyAgreement: "Die <a id='privacy-policy'></a> habe ich zur Kenntnis genommen.",
         termsTitle: "Nutzungsbedingungen",
+        footerCopyright: "Copyright © 2023. Alle Rechte vorbehalten matrix gGmbH",
+        footerMintIDInfo: "Alle Informationen zur MINT-ID"
     },
     en: {
         // doLogin: "Login",
@@ -33,7 +35,9 @@ export const { useI18n } = createUseI18n({
         registerTitle: "Register a MINT-ID",
         registerTermsAgreement: "*I agree to the <a id='terms-of-use'></a>.",
         registerPrivacyPolicyAgreement: "I have taken note of <a id='privacy-policy'></a>.",
-        termsTitle: "Terms and Conditions"
+        termsTitle: "Terms and Conditions",
+        footerCopyright: "Copyright © 2023. All Rights Reserved matrix gGmbH",
+        footerMintIDInfo: "All information about the MINT-ID"
     },
     // fr: {
     //     /* spell-checker: disable */

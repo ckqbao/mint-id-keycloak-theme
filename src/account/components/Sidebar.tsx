@@ -5,8 +5,8 @@ import { clsx } from 'keycloakify/tools/clsx'
 import { KcContext } from 'account/kcContext'
 import { I18n } from 'account/i18n'
 
-import mintCampusLogo from '../assets/MINT-Campus-Logo.png'
-import mintVernetztLogo from '../assets/Mintvernetzt-Logo.png'
+import mintCampusLogo from '../../assets/img/MINT-Campus-Logo.png'
+import mintVernetztLogo from '../../assets/img/Mintvernetzt-Logo.png'
 
 type SidebarProps = {
   active: string
@@ -15,6 +15,7 @@ type SidebarProps = {
   onClose: () => void
   open: boolean
 }
+
 export default function Sidebar(props: SidebarProps) {
   const { active, i18n, kcContext, onClose, open } = props
 
@@ -73,76 +74,100 @@ export default function Sidebar(props: SidebarProps) {
                   </div>
                   <nav className="flex flex-1 flex-col">
                     <ul className="-mx-2 space-y-1">
-                      <li
-                        className={clsx(
-                          active === 'account' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                          'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <a href={url.accountUrl}>{msg('account')}</a>
+                      <li>
+                        <a
+                          href={url.accountUrl}
+                          className={clsx(
+                            active === 'account' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                            'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                          )}
+                        >
+                          {msg('account')}
+                        </a>
                       </li>
                       {features.passwordUpdateSupported && (
-                        <li
+                        <li>
+                          <a
+                            href={url.passwordUrl}
+                            className={clsx(
+                              active === 'password' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                              'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                            )}
+                          >
+                            {msg('password')}
+                          </a>
+                        </li>
+                      )}
+                      {/* <li>
+                        <a
+                          href={url.totpUrl}
                           className={clsx(
-                            active === 'password' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                            active === 'totp' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
                             'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                           )}
                         >
-                          <a href={url.passwordUrl}>{msg('password')}</a>
-                        </li>
-                      )}
-                      {/* <li
-                        className={clsx(
-                          active === 'totp' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                          'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <a href={url.totpUrl}>{msg('authenticator')}</a>
+                          {msg('authenticator')}
+                        </a>
                       </li>
                       {features.identityFederation && (
-                        <li
-                          className={clsx(
-                            active === 'social' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                            'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                          )}
-                        >
-                          <a href={url.socialUrl}>{msg('federatedIdentity')}</a>
+                        <li>
+                          <a
+                            href={url.socialUrl}
+                            className={clsx(
+                              active === 'social' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                              'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                            )}
+                          >
+                            {msg('federatedIdentity')}
+                          </a>
                         </li>
                       )}
-                      <li
-                        className={clsx(
-                          active === 'sessions' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                          'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <a href={url.sessionsUrl}>{msg('sessions')}</a>
-                      </li>
-                      <li
-                        className={clsx(
-                          active === 'applications' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                          'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <a href={url.applicationsUrl}>{msg('applications')}</a>
-                      </li>
-                      {features.log && (
-                        <li
+                      <li>
+                        <a
+                          href={url.sessionsUrl}
                           className={clsx(
-                            active === 'log' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                            active === 'sessions' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
                             'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                           )}
                         >
-                          <a href={url.logUrl}>{msg('log')}</a>
+                          {msg('sessions')}
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href={url.applicationsUrl}
+                          className={clsx(
+                            active === 'applications' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                            'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                          )}
+                        >
+                          {msg('applications')}
+                        </a>
+                      </li>
+                      {features.log && (
+                        <li>
+                          <a
+                            href={url.logUrl}
+                            className={clsx(
+                              active === 'log' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                              'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                            )}
+                          >
+                            {msg('log')}
+                          </a>
                         </li>
                       )}
                       {realm.userManagedAccessAllowed && features.authorization && (
-                        <li
-                          className={clsx(
-                            active === 'authorization' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                            'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                          )}
-                        >
-                          <a href={url.resourceUrl}>{msg('myResources')}</a>
+                        <li>
+                          <a
+                            href={url.resourceUrl}
+                            className={clsx(
+                              active === 'authorization' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                              'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                            )}
+                          >
+                            {msg('myResources')}
+                          </a>
                         </li>
                       )} */}
                     </ul>
@@ -168,7 +193,7 @@ export default function Sidebar(props: SidebarProps) {
                 <a
                   href={url.accountUrl}
                   className={clsx(
-                    active === 'account' ? 'bg-gray-50 text-primary hover:text-primary' : 'text-gray-700 hover:text-primary hover:bg-gray-50',
+                    active === 'account' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
                     'cursor-pointer group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold'
                   )}
                 >
@@ -176,67 +201,88 @@ export default function Sidebar(props: SidebarProps) {
                 </a>
               </li>
               {features.passwordUpdateSupported && (
-                <li
-                  className={clsx(
-                    active === 'password' ? 'bg-gray-50 text-primary hover:text-primary' : 'text-gray-700 hover:text-primary hover:bg-gray-50',
-                    'cursor-pointer group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold'
-                  )}
-                >
-                  <a href={url.passwordUrl}>{msg('password')}</a>
+                <li>
+                  <a
+                    href={url.passwordUrl}
+                    className={clsx(
+                      active === 'password' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                      'cursor-pointer group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold'
+                    )}
+                  >
+                    {msg('password')}
+                  </a>
                 </li>
               )}
-              {/* <li
-                className={clsx(
-                  active === 'totp' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                  'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                )}
-              >
-                <a href={url.totpUrl}>{msg('authenticator')}</a>
+              {/* <li>
+                <a
+                  href={url.totpUrl}
+                  className={clsx(
+                    active === 'totp' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                    'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                  )}
+                >
+                  {msg('authenticator')}
+                </a>
               </li>
               {features.identityFederation && (
-                <li
-                  className={clsx(
-                    active === 'social' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                    'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                  )}
-                >
-                  <a href={url.socialUrl}>{msg('federatedIdentity')}</a>
+                <li>
+                  <a
+                    href={url.socialUrl}
+                    className={clsx(
+                      active === 'social' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                      'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                    )}
+                  >
+                    {msg('federatedIdentity')}
+                  </a>
                 </li>
               )}
-              <li
-                className={clsx(
-                  active === 'sessions' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                  'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                )}
-              >
-                <a href={url.sessionsUrl}>{msg('sessions')}</a>
-              </li>
-              <li
-                className={clsx(
-                  active === 'applications' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                  'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                )}
-              >
-                <a href={url.applicationsUrl}>{msg('applications')}</a>
-              </li>
-              {features.log && (
-                <li
+              <li>
+                <a
+                  href={url.sessionsUrl}
                   className={clsx(
-                    active === 'log' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                    active === 'sessions' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
                     'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                   )}
                 >
-                  <a href={url.logUrl}>{msg('log')}</a>
+                  {msg('sessions')}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={url.applicationsUrl}
+                  className={clsx(
+                    active === 'applications' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                    'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                  )}
+                >
+                  {msg('applications')}
+                </a>
+              </li>
+              {features.log && (
+                <li>
+                  <a
+                    href={url.logUrl}
+                    className={clsx(
+                      active === 'log' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                      'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                    )}
+                  >
+                    {msg('log')}
+                  </a>
                 </li>
               )}
               {realm.userManagedAccessAllowed && features.authorization && (
-                <li
-                  className={clsx(
-                    active === 'authorization' ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                    'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                  )}
-                >
-                  <a href={url.resourceUrl}>{msg('myResources')}</a>
+                <li>
+                  <a
+                    href={url.resourceUrl}
+                    className={clsx(
+                      active === 'authorization' ? 'bg-[#252131] text-white hover:text-white' : 'text-gray-700 hover:text-white hover:bg-[#252131]',
+                      'cursor-pointer group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                    )}
+                  >
+                    {msg('myResources')}
+                  </a>
                 </li>
               )} */}
             </ul>

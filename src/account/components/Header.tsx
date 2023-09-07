@@ -42,7 +42,7 @@ export default function Header(props: HeaderProps) {
                     <div>
                       <Menu.Button className="ds-btn ds-btn-circle ds-btn-ghost">
                         <span className="sr-only">Open languages menu</span>
-                        <GlobeAltIcon className="h-8 w-8 text-[#551C77]" />
+                        <GlobeAltIcon className="h-8 w-8 text-[#252131]" />
                       </Menu.Button>
                     </div>
                     <Transition
@@ -75,7 +75,7 @@ export default function Header(props: HeaderProps) {
                     <div>
                       <Menu.Button className="ds-btn ds-btn-circle ds-btn-ghost">
                         <span className="sr-only">Open user menu</span>
-                        <UserCircleIcon className="h-8 w-8 text-[#551C77]" />
+                        <UserCircleIcon className="h-8 w-8 text-[#252131]" />
                       </Menu.Button>
                     </div>
                     <Transition

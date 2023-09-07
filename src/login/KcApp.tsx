@@ -14,6 +14,7 @@ const DefaultTemplate = lazy(() => import('keycloakify/login/Template'))
 const Login = lazy(() => import('./pages/Login'))
 const LoginResetPassword = lazy(() => import('./pages/LoginResetPassword'))
 const LogoutConfirm = lazy(() => import('./pages/LogoutConfirm'))
+const LoginOAuthGrant = lazy(() => import('./pages/LoginOAuthGrant'))
 // If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
 const Register = lazy(() => import('./pages/Register'))
 const RegisterUserProfile = lazy(() => import('./pages/RegisterUserProfile'))
@@ -57,6 +58,8 @@ export default function KcApp(props: { kcContext: KcContext }) {
             return <LoginResetPassword {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'logout-confirm.ftl':
             return <LogoutConfirm {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
+          case 'login-oauth-grant.ftl':
+            return <LoginOAuthGrant {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'register.ftl':
             return <Register {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'register-user-profile.ftl':

@@ -12,7 +12,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 				authorization: false,
 			},
 			message: {
-				type: "error",
+				type: "warning",
 				summary: 'hgsligh'
 			},
 			messagesPerField: {

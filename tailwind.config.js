@@ -17,8 +17,8 @@ module.exports = {
     themes: [
       {
         myTheme: {
-          "primary": "#551C77",
-          "neutral": "#ECDBEA"
+          "neutral": "#D0D5DD",
+          "primary": "#252131",
         }
       }
     ], // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]

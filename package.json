@@ -1,8 +1,8 @@
 {
-    "name": "keycloakify-starter",
-    "homepage": "https://starter.keycloakify.dev",
+    "name": "mint-id",
+    "homepage": "https://mint-id.org",
     "version": "4.5.1",
-    "description": "A starter/demo project for keycloakify",
+    "description": "Keycloak theme project for Mint-ID",
     "repository": {
         "type": "git",
         "url": "git://github.com/codegouvfr/keycloakify-starter.git"
@@ -15,9 +15,12 @@
         "storybook": "start-storybook -p 6006"
     },
     "keycloakify": {
-        "themeName": "Customized-keycloak-theme"
+        "extraPages": [
+            "login-oauth-grant.ftl"
+        ],
+        "themeName": "MINT-ID"
     },
-    "author": "u/garronej",
+    "author": "ckqbao",
     "license": "MIT",
     "keywords": [],
     "dependencies": {

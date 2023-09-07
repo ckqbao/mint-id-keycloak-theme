@@ -1,67 +1,59 @@
 // ejected using 'npx eject-keycloak-page'
-import { useEffect, useMemo, useRef, useState } from "react";
-import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useFormValidation } from "keycloakify/login/lib/useFormValidation";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { clsx } from 'keycloakify/tools/clsx'
+import type { PageProps } from 'keycloakify/login/pages/PageProps'
+import { useGetClassName } from 'keycloakify/login/lib/useGetClassName'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useFormValidation } from 'keycloakify/login/lib/useFormValidation'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
-import type { KcContext } from "../kcContext";
-import type { I18n } from "../i18n";
+import type { KcContext } from '../kcContext'
+import type { I18n } from '../i18n'
 
-import mintCampusLogo from "../assets/MINT-Campus-Logo.png";
-import mintVernetztLogo from "../assets/Mintvernetzt-Logo.png";
+import mintCampusLogo from '../../assets/img/MINT-Campus-Logo.png'
+import mintVernetztLogo from '../../assets/img/Mintvernetzt-Logo.png'
+import { ReactComponent as FooterSvg } from '../../assets/svg/footer.svg'
 
-export default function RegisterUserProfile(
-  props: PageProps<Extract<KcContext, { pageId: "register-user-profile.ftl" }>, I18n>
-) {
-  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+export default function RegisterUserProfile(props: PageProps<Extract<KcContext, { pageId: 'register-user-profile.ftl' }>, I18n>) {
+  const { kcContext, i18n, doUseDefaultCss, Template, classes } = props
 
-  const agreementLabelRef = useRef(null);
+  const agreementLabelRef = useRef(null)
 
-  const [agreementChecked, setAgreementChecked] = useState(false);
+  const [agreementChecked, setAgreementChecked] = useState(false)
 
   const { getClassName } = useGetClassName({
     doUseDefaultCss,
     classes,
-  });
+  })
+
+  const { url, messagesPerField, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey } = kcContext
+
+  const { msg, msgStr } = i18n
+  const { registrationEmailAsUsername } = realm
 
   const {
-    url,
-    messagesPerField,
-    realm,
-    passwordRequired,
-    recaptchaRequired,
-    recaptchaSiteKey,
-  } = kcContext;
-
-  const { msg, msgStr } = i18n;
-  const { registrationEmailAsUsername } = realm;
-
-  const { attributesWithPassword, formValidationState: { fieldStateByAttributeName }, } = useFormValidation({ kcContext, i18n });
-  const organizationNameAttribute = attributesWithPassword.find(attr => attr.name === 'organizationName')
+    attributesWithPassword,
+    formValidationState: { fieldStateByAttributeName },
+  } = useFormValidation({ kcContext, i18n })
+  const organizationNameAttribute = attributesWithPassword.find((attr) => attr.name === 'organizationName')
 
   const schema = useMemo(
     () =>
       yup.object({
-        firstName: yup.string().required(msgStr("error-empty")),
-        lastName: yup.string().required(msgStr("error-empty")),
+        firstName: yup.string().required(msgStr('error-empty')),
+        lastName: yup.string().required(msgStr('error-empty')),
         organizationName: yup.string(),
-        email: yup
+        email: yup.string().email(msgStr('error-invalid-email')).required(msgStr('error-empty')),
+        username: registrationEmailAsUsername ? yup.string() : yup.string().required(msgStr('error-empty')),
+        password: yup.string().required(msgStr('error-empty')),
+        'password-confirm': yup
           .string()
-          .email(msgStr("error-invalid-email"))
-          .required(msgStr("error-empty")),
-        username: registrationEmailAsUsername ? yup.string() : yup.string().required(msgStr("error-empty")),
-        password: yup.string().required(msgStr("error-empty")),
-        "password-confirm": yup
-          .string()
-          .required(msgStr("error-empty"))
-          .oneOf([yup.ref("password")], "Your passwords do not match."),
+          .required(msgStr('error-empty'))
+          .oneOf([yup.ref('password')], 'Your passwords do not match.'),
       }),
     [registrationEmailAsUsername]
-  );
+  )
 
   const {
     formState: { errors, isDirty },
@@ -70,201 +62,153 @@ export default function RegisterUserProfile(
     unregister: unregisterField,
   } = useForm({
     defaultValues: {
-      firstName: fieldStateByAttributeName["firstName"]?.value ?? "",
-      lastName: fieldStateByAttributeName["lastName"]?.value ?? "",
-      organizationName: fieldStateByAttributeName["organizationName"]?.value ?? "",
-      email: fieldStateByAttributeName["email"]?.value ?? "",
-      username: registrationEmailAsUsername ? undefined : (fieldStateByAttributeName["username"]?.value ?? ""),
-      password: "",
-      "password-confirm": "",
+      firstName: fieldStateByAttributeName['firstName']?.value ?? '',
+      lastName: fieldStateByAttributeName['lastName']?.value ?? '',
+      organizationName: fieldStateByAttributeName['organizationName']?.value ?? '',
+      email: fieldStateByAttributeName['email']?.value ?? '',
+      username: registrationEmailAsUsername ? undefined : fieldStateByAttributeName['username']?.value ?? '',
+      password: '',
+      'password-confirm': '',
     },
     resolver: yupResolver(schema),
-  });
+  })
 
   useEffect(() => {
     const observer = new MutationObserver((mutations, mutationInstance) => {
-      const termsOfUseLink =
-        document.querySelector<HTMLAnchorElement>("a#terms-of-use");
-      const privacyPolicy =
-        document.querySelector<HTMLAnchorElement>("a#privacy-policy");
+      const termsOfUseLink = document.querySelector<HTMLAnchorElement>('a#terms-of-use')
+      const privacyPolicy = document.querySelector<HTMLAnchorElement>('a#privacy-policy')
       if (termsOfUseLink && privacyPolicy) {
-        termsOfUseLink.setAttribute("href", "https://mintcampus.org/nutzungsbedingungen/");
-        termsOfUseLink.setAttribute("target", "_blank");
-        termsOfUseLink.style.color = "#f6688e";
-        termsOfUseLink.style.fontWeight = "bold";
-        termsOfUseLink.style.textDecoration = "underline";
-        termsOfUseLink.innerHTML = msgStr("termsTitle");
+        termsOfUseLink.setAttribute('href', 'https://mintcampus.org/nutzungsbedingungen/')
+        termsOfUseLink.setAttribute('target', '_blank')
+        termsOfUseLink.style.color = '#252131'
+        termsOfUseLink.style.fontWeight = 'bold'
+        termsOfUseLink.style.textDecoration = 'underline'
+        termsOfUseLink.innerHTML = msgStr('termsTitle')
 
-        privacyPolicy.setAttribute("href", "https://mintcampus.org/datenschutzerklaerung/");
-        privacyPolicy.setAttribute("target", "_blank");
-        privacyPolicy.style.color = "#f6688e";
-        privacyPolicy.style.fontWeight = "bold";
-        privacyPolicy.style.textDecoration = "underline";
-        privacyPolicy.innerHTML = msgStr("privacyPolicyTitle");
+        privacyPolicy.setAttribute('href', 'https://mintcampus.org/datenschutzerklaerung/')
+        privacyPolicy.setAttribute('target', '_blank')
+        privacyPolicy.style.color = '#252131'
+        privacyPolicy.style.fontWeight = 'bold'
+        privacyPolicy.style.textDecoration = 'underline'
+        privacyPolicy.innerHTML = msgStr('privacyPolicyTitle')
 
-        mutationInstance.disconnect();
+        mutationInstance.disconnect()
       }
-    });
+    })
     observer.observe(document, {
       attributes: true,
       childList: true,
       subtree: true,
-    });
+    })
 
-    document.body.classList.add("register");
+    document.body.classList.add('register')
 
     return () => {
-      observer.disconnect();
-      document.body.classList.remove("register");
-    };
-  }, []);
+      observer.disconnect()
+      document.body.classList.remove('register')
+    }
+  }, [])
 
   useEffect(() => {
     if (!registrationEmailAsUsername) {
-      registerField("username");
+      registerField('username')
     } else {
-      unregisterField("username");
+      unregisterField('username')
     }
-  }, [registrationEmailAsUsername, registerField, unregisterField]);
+  }, [registrationEmailAsUsername, registerField, unregisterField])
 
   const submit: SubmitHandler<yup.InferType<typeof schema>> = (_values, event) => {
     event?.target.submit()
-  };
+  }
 
   return (
     <>
       <Template
         {...{ kcContext, i18n, doUseDefaultCss, classes }}
         displayInfo
-        headerNode={msg("registerTitle")}
+        headerNode={msg('registerTitle')}
         infoNode={
           <div id="back-to-login">
             <span>
-              {msg("alreadyHaveAccount")}
-              <a href={url.loginUrl} className="kc-link">{msg("doLogIn")}</a>
+              {msg('alreadyHaveAccount')}
+              <a href={url.loginUrl} className="kc-link ml-2">
+                {msg('doLogIn')}
+              </a>
             </span>
           </div>
         }
       >
-        <form
-          id="kc-register-form"
-          className={getClassName("kcFormClass")}
-          onSubmit={handleSubmit(submit)}
-          action={url.registrationAction}
-          method="post"
-        >
+        <form id="kc-register-form" className={getClassName('kcFormClass')} onSubmit={handleSubmit(submit)} action={url.registrationAction} method="post">
           <div
-            className={clsx(
-              getClassName("kcFormGroupClass"),
-              messagesPerField.printIfExists(
-                "firstName",
-                getClassName("kcFormGroupErrorClass")
-              ),
-              {
-                [getClassName("kcFormGroupErrorClass")]: !!errors.firstName,
-              }
-            )}
+            className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('firstName', getClassName('kcFormGroupErrorClass')), {
+              [getClassName('kcFormGroupErrorClass')]: !!errors.firstName,
+            })}
           >
-            <div className={getClassName("kcInputWrapperClass")}>
+            <div className={getClassName('kcInputWrapperClass')}>
               <input
-                {...registerField("firstName")}
+                {...registerField('firstName')}
                 type="text"
                 id="firstName"
-                className={getClassName("kcInputClass")}
-                placeholder={msgStr("firstName") + "*"}
+                className={clsx(getClassName('kcInputClass'), 'w-full')}
+                placeholder={msgStr('firstName') + '*'}
               />
             </div>
           </div>
 
           <div
-            className={clsx(
-              getClassName("kcFormGroupClass"),
-              messagesPerField.printIfExists(
-                "lastName",
-                getClassName("kcFormGroupErrorClass")
-              ),
-              {
-                [getClassName("kcFormGroupErrorClass")]: !!errors.lastName,
-              }
-            )}
+            className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('lastName', getClassName('kcFormGroupErrorClass')), {
+              [getClassName('kcFormGroupErrorClass')]: !!errors.lastName,
+            })}
           >
-            <div className={getClassName("kcInputWrapperClass")}>
-              <input
-                {...registerField("lastName")}
-                type="text"
-                id="lastName"
-                className={getClassName("kcInputClass")}
-                placeholder={msgStr("lastName") + "*"}
-              />
+            <div className={getClassName('kcInputWrapperClass')}>
+              <input {...registerField('lastName')} type="text" id="lastName" className={clsx(getClassName('kcInputClass'), 'w-full')} placeholder={msgStr('lastName') + '*'} />
             </div>
           </div>
           {!!organizationNameAttribute && (
-          <div
-            className={clsx(
-              getClassName("kcFormGroupClass"),
-              messagesPerField.printIfExists(
-                "organizationName",
-                getClassName("kcFormGroupErrorClass")
-              )
-            )}
-          >
-            <div className={getClassName("kcInputWrapperClass")}>
-              <input
-                {...registerField("organizationName")}
-                type="text"
-                id="organizationName"
-                className={getClassName("kcInputClass")}
-                placeholder={msgStr("organizationName")}
-              />
+            <div className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('organizationName', getClassName('kcFormGroupErrorClass')))}>
+              <div className={getClassName('kcInputWrapperClass')}>
+                <input
+                  {...registerField('organizationName')}
+                  type="text"
+                  id="organizationName"
+                  className={clsx(getClassName('kcInputClass'), 'w-full')}
+                  placeholder={msgStr('organizationName')}
+                />
+              </div>
             </div>
-          </div>
           )}
           <div
-            className={clsx(
-              getClassName("kcFormGroupClass"),
-              messagesPerField.printIfExists(
-                "email",
-                getClassName("kcFormGroupErrorClass")
-              ),
-              {
-                [getClassName("kcFormGroupErrorClass")]: !!errors.email,
-              }
-            )}
+            className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('email', getClassName('kcFormGroupErrorClass')), {
+              [getClassName('kcFormGroupErrorClass')]: !!errors.email,
+            })}
           >
-            <div className={getClassName("kcInputWrapperClass")}>
+            <div className={getClassName('kcInputWrapperClass')}>
               <input
-                {...registerField("email")}
+                {...registerField('email')}
                 type="text"
                 id="email"
-                className={getClassName("kcInputClass")}
+                className={clsx(getClassName('kcInputClass'), 'w-full')}
                 autoComplete="email"
-                placeholder={msgStr("email") + "*"}
+                placeholder={msgStr('email') + '*'}
               />
             </div>
           </div>
           {!realm.registrationEmailAsUsername && (
             <div
-              className={clsx(
-                getClassName("kcFormGroupClass"),
-                messagesPerField.printIfExists(
-                  "username",
-                  getClassName("kcFormGroupErrorClass")
-                ),
-                {
-                  [getClassName("kcFormGroupErrorClass")]: !!errors.username,
-                }
-              )}
+              className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('username', getClassName('kcFormGroupErrorClass')), {
+                [getClassName('kcFormGroupErrorClass')]: !!errors.username,
+              })}
             >
-              <div className={getClassName("kcInputWrapperClass")}>
+              <div className={getClassName('kcInputWrapperClass')}>
                 <input
-                  {...registerField("username")}
+                  {...registerField('username')}
                   type="text"
                   id="username"
-                  className={getClassName("kcInputClass")}
+                  className={clsx(getClassName('kcInputClass'), 'w-full')}
                   name="username"
                   defaultValue=""
                   autoComplete="username"
-                  placeholder={msgStr("username") + "*"}
+                  placeholder={msgStr('username') + '*'}
                 />
               </div>
             </div>
@@ -272,56 +216,41 @@ export default function RegisterUserProfile(
           {passwordRequired && (
             <>
               <div
-                className={clsx(
-                  getClassName("kcFormGroupClass"),
-                  messagesPerField.printIfExists(
-                    "password",
-                    getClassName("kcFormGroupErrorClass")
-                  ),
-                  {
-                    [getClassName("kcFormGroupErrorClass")]: !!errors.password,
-                  }
-                )}
+                className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('password', getClassName('kcFormGroupErrorClass')), {
+                  [getClassName('kcFormGroupErrorClass')]: !!errors.password,
+                })}
               >
-                <div className={getClassName("kcInputWrapperClass")}>
+                <div className={getClassName('kcInputWrapperClass')}>
                   <input
-                    {...registerField("password")}
+                    {...registerField('password')}
                     type="password"
                     id="password"
-                    className={getClassName("kcInputClass")}
+                    className={clsx(getClassName('kcInputClass'), 'w-full')}
                     autoComplete="new-password"
-                    placeholder={msgStr("password") + "*"}
+                    placeholder={msgStr('password') + '*'}
                   />
                 </div>
               </div>
 
               <div
-                className={clsx(
-                  getClassName("kcFormGroupClass"),
-                  messagesPerField.printIfExists(
-                    "password-confirm",
-                    getClassName("kcFormGroupErrorClass")
-                  ),
-                  {
-                    [getClassName("kcFormGroupErrorClass")]:
-                      !!errors["password-confirm"],
-                  }
-                )}
+                className={clsx(getClassName('kcFormGroupClass'), messagesPerField.printIfExists('password-confirm', getClassName('kcFormGroupErrorClass')), {
+                  [getClassName('kcFormGroupErrorClass')]: !!errors['password-confirm'],
+                })}
               >
-                <div className={getClassName("kcInputWrapperClass")}>
+                <div className={getClassName('kcInputWrapperClass')}>
                   <input
-                    {...registerField("password-confirm")}
+                    {...registerField('password-confirm')}
                     type="password"
                     id="password-confirm"
-                    className={getClassName("kcInputClass")}
-                    placeholder={msgStr("passwordConfirm") + "*"}
+                    className={clsx(getClassName('kcInputClass'), 'w-full')}
+                    placeholder={msgStr('passwordConfirm') + '*'}
                   />
                 </div>
               </div>
             </>
           )}
-          <div className={getClassName("kcFormGroupClass")}>
-            <div className={getClassName("kcInputWrapperClass")}>
+          <div className={getClassName('kcFormGroupClass')}>
+            <div className={getClassName('kcInputWrapperClass')}>
               <div id="kc-agreement">
                 <div>
                   <input
@@ -329,16 +258,13 @@ export default function RegisterUserProfile(
                     name="agreement"
                     type="checkbox"
                     checked={agreementChecked}
-                    onChange={(event) =>
-                      setAgreementChecked(event.target.checked)
-                    }
+                    onChange={(event) => setAgreementChecked(event.target.checked)}
                     required={isDirty && !Object.keys(errors).length}
                   />
                 </div>
                 <div>
                   <label ref={agreementLabelRef} htmlFor="agreement">
-                    {msg("registerTermsAgreement")}{" "}
-                    {msg("registerPrivacyPolicyAgreement")}
+                    {msg('registerTermsAgreement')} {msg('registerPrivacyPolicyAgreement')}
                   </label>
                 </div>
               </div>
@@ -346,12 +272,8 @@ export default function RegisterUserProfile(
           </div>
           {recaptchaRequired && (
             <div className="form-group">
-              <div className={getClassName("kcInputWrapperClass")}>
-                <div
-                  className="g-recaptcha"
-                  data-size="compact"
-                  data-sitekey={recaptchaSiteKey}
-                ></div>
+              <div className={getClassName('kcInputWrapperClass')}>
+                <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey}></div>
               </div>
             </div>
           )}
@@ -361,45 +283,36 @@ export default function RegisterUserProfile(
                 errors.lastName?.message ??
                 errors.email?.message ??
                 errors.password?.message ??
-                errors["password-confirm"]?.message ??
-                ""}
+                errors['password-confirm']?.message ??
+                ''}
             </div>
           )}
-          <div className={getClassName("kcFormGroupClass")}>
-            <div
-              id="kc-form-buttons"
-              className={getClassName("kcFormButtonsClass")}
-            >
-              <button
-                className={clsx(
-                  getClassName("kcButtonClass"),
-                  getClassName("kcButtonPrimaryClass")
-                )}
-                id="kc-register"
-                type="submit"
-              >
-                {msgStr("doRegister")}
+          <div className={getClassName('kcFormGroupClass')}>
+            <div id="kc-form-buttons" className={getClassName('kcFormButtonsClass')}>
+              <button className={clsx(getClassName('kcButtonClass'), getClassName('kcButtonPrimaryClass'))} id="kc-register" type="submit">
+                {msgStr('doRegister')}
               </button>
-              <button
-                className={clsx(
-                  getClassName("kcButtonClass"),
-                  getClassName("kcButtonDefaultClass")
-                )}
-                onClick={() => window.history.back()}
-              >
-                {msgStr("doCancel")}
+              <button className={clsx(getClassName('kcButtonClass'), getClassName('kcButtonDefaultClass'))} onClick={() => window.history.back()}>
+                {msgStr('doCancel')}
               </button>
             </div>
           </div>
         </form>
       </Template>
       <div className="kcRegisterBanner">
-        <span>{msgStr("registerBanner")}</span>
-        <div style={{ display: 'flex', gap: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '30px', marginBottom: '30px' }}>
-          <img src={mintVernetztLogo} alt="mint-vernetzt" />
-          <img src={mintCampusLogo} alt="mint-campus" />
+        <span>{msgStr('registerBanner')}</span>
+        <div style={{ display: 'flex', gap: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '30px', marginBottom: '45px' }}>
+          <img src={mintVernetztLogo} alt="mint-vernetzt" width="122" height="122" />
+          <img src={mintCampusLogo} alt="mint-campus" width="120" height="120" />
         </div>
+        <a href="#" className="kc-link font-bold !text-[20px] !text-[#252C30]">
+          {msgStr('footerMintIDInfo')}
+        </a>
+        <div className='flex items-center justify-center mt-10'>
+          <FooterSvg />
+        </div>
+        <p className="kc-footer-copyright pt-4 pb-9">{msgStr('footerCopyright')}</p>
       </div>
     </>
-  );
+  )
 }

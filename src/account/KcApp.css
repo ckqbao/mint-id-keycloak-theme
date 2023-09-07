@@ -16,39 +16,43 @@ This is why I made sure to use .my-root-account-class instead of .my-root-class 
 }
 
 @layer components {
-  .ds-btn-primary {
+  .kc-btn.ds-btn-primary {
+    background-color: #252131;
     color: #FFF;
   }
 
   .ds-btn-neutral {
-    color: #978DB2;
+    background-color: #D0D5DD;
+    color: #191D23;
   }
 
   .kc-btn {
-    @apply h-[34px] min-h-[34px];
+    /* @apply h-[34px] min-h-[34px]; */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 20px;
+    padding: 10px 36px;
     gap: 10px;
     mix-blend-mode: normal;
     border-radius: 8px;
     border: none;
     box-shadow: none;
-    font-family: "Source Sans Pro";
+    font-family: "Source Sans 3";
     font-style: normal;
     font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 16px;
+    line-height: 22px;
   
     text-align: center;
     letter-spacing: 0.03em;
     font-feature-settings: "kern" off;
+
+    color: #191D23;
   }
 
   .kc-input {
-    @apply block w-full rounded-md border-0 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6;
+    @apply block w-full rounded-md border-0 py-1.5 text-[#252131] placeholder:text-[#0000004d] sm:text-sm sm:leading-6;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -56,9 +60,9 @@ This is why I made sure to use .my-root-account-class instead of .my-root-class 
     padding: 12px 16px;
     gap: 16px;
 
-    background: #f0e9e5;
+    background: #fff;
     border-radius: 8px;
-    border: none;
+    border: 1px solid #D0D5DD;
     box-shadow: none !important;
 
     font-family: "Source Sans 3";
@@ -68,15 +72,19 @@ This is why I made sure to use .my-root-account-class instead of .my-root-class 
     line-height: 19px;
     letter-spacing: -0.02em;
     font-feature-settings: "kern" off;
-
-    color: #978db2;
   }
+
+  .kc-input:focus {
+    border-color: #D0D5DD;
+  }
+
   .kc-input-error {
-    @apply ring-2 ring-inset ring-[#F6688E] !important;
+    @apply ring-2 ring-inset ring-[#EF4444] !important;
+    border: none;
   }
 
   .kc-input-label {
-    @apply block text-sm font-medium leading-6 text-[#551C77];
+    @apply block text-sm font-medium leading-6 text-[#252131];
   }
 
   .kc-page-title {
@@ -100,7 +108,7 @@ a:hover {
 
 .my-root-account-class {
 	min-height: 100vh;
-  background: url(./assets/MC-hg-DotsPulpo.png) no-repeat center center fixed;
+  background: #fff;
   background-size: cover;
   display: flex;
   justify-content: center
