@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { Popover, Whisper, Button } from 'rsuite'
 import { clsx } from 'keycloakify/tools/clsx'
 import { KcContext } from 'account/kcContext'
 import { I18n } from 'account/i18n'
@@ -19,7 +20,7 @@ type SidebarProps = {
 export default function Sidebar(props: SidebarProps) {
   const { active, i18n, kcContext, onClose, open } = props
 
-  const { url, features, realm } = kcContext
+  const { url, features } = kcContext
 
   const { msg } = i18n
 
@@ -188,7 +189,7 @@ export default function Sidebar(props: SidebarProps) {
             <img className="h-12 w-auto" src={mintVernetztLogo} alt="MINT Vernetzt" />
           </div>
           <nav className="flex flex-1 flex-col">
-            <ul className="-mx-2 space-y-1">
+            <ul className="flex-1 -mx-2 space-y-1">
               <li>
                 <a
                   href={url.accountUrl}
@@ -286,6 +287,25 @@ export default function Sidebar(props: SidebarProps) {
                 </li>
               )} */}
             </ul>
+            <Whisper
+              placement="topStart"
+              trigger="click"
+              controlId="control-id-click"
+              speaker={
+                <Popover>
+                  <p>{msg('deleteAccountPopoverInfo')}</p>
+                </Popover>
+              }
+            >
+              <Button
+                className={clsx(
+                  'text-gray-700 hover:text-white hover:bg-[#252131]',
+                  '-mx-2 cursor-pointer group flex gap-x-3 rounded-md p-2 !text-base !leading-6 !font-semibold'
+                )}
+              >
+                {msg('deleteAccount')}
+              </Button>
+            </Whisper>
           </nav>
         </div>
       </div>

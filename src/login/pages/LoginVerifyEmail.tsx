@@ -11,14 +11,14 @@ export default function LoginVerifyEmail(props: PageProps<Extract<KcContext, { p
 
   return (
     <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} displayMessage={false} headerNode={msg('emailVerifyTitle')}>
-      <p className="instruction">{msg('emailVerifyInstruction1', user?.email ?? '')}</p>
-      <p className="instruction">
+      <p className="instruction text-[#252131]">{msg('emailVerifyInstruction1', user?.email ?? '')}</p>
+      {/* <p className="instruction">
         {msg('emailVerifyInstruction2')}
         <br />
         <a href={url.loginAction}>{msg('doClickHere')}</a>
         &nbsp;
         {msg('emailVerifyInstruction3')}
-      </p>
+      </p> */}
     </Template>
   )
 }

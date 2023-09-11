@@ -11,10 +11,6 @@ import * as yup from 'yup'
 import type { KcContext } from '../kcContext'
 import type { I18n } from '../i18n'
 
-import mintCampusLogo from '../../assets/img/MINT-Campus-Logo.png'
-import mintVernetztLogo from '../../assets/img/Mintvernetzt-Logo.png'
-import { ReactComponent as FooterSvg } from '../../assets/svg/footer.svg'
-
 export default function RegisterUserProfile(props: PageProps<Extract<KcContext, { pageId: 'register-user-profile.ftl' }>, I18n>) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props
 
@@ -78,14 +74,14 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
       const termsOfUseLink = document.querySelector<HTMLAnchorElement>('a#terms-of-use')
       const privacyPolicy = document.querySelector<HTMLAnchorElement>('a#privacy-policy')
       if (termsOfUseLink && privacyPolicy) {
-        termsOfUseLink.setAttribute('href', 'https://mintcampus.org/nutzungsbedingungen/')
+        termsOfUseLink.setAttribute('href', '/nutzungsbedingungen')
         termsOfUseLink.setAttribute('target', '_blank')
         termsOfUseLink.style.color = '#252131'
         termsOfUseLink.style.fontWeight = 'bold'
         termsOfUseLink.style.textDecoration = 'underline'
         termsOfUseLink.innerHTML = msgStr('termsTitle')
 
-        privacyPolicy.setAttribute('href', 'https://mintcampus.org/datenschutzerklaerung/')
+        privacyPolicy.setAttribute('href', '/datenschutz')
         privacyPolicy.setAttribute('target', '_blank')
         privacyPolicy.style.color = '#252131'
         privacyPolicy.style.fontWeight = 'bold'
@@ -122,7 +118,6 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
   }
 
   return (
-    <>
       <Template
         {...{ kcContext, i18n, doUseDefaultCss, classes }}
         displayInfo
@@ -299,20 +294,5 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
           </div>
         </form>
       </Template>
-      <div className="kcRegisterBanner">
-        <span>{msgStr('registerBanner')}</span>
-        <div style={{ display: 'flex', gap: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '30px', marginBottom: '45px' }}>
-          <img src={mintVernetztLogo} alt="mint-vernetzt" width="122" height="122" />
-          <img src={mintCampusLogo} alt="mint-campus" width="120" height="120" />
-        </div>
-        <a href="#" className="kc-link font-bold !text-[20px] !text-[#252C30]">
-          {msgStr('footerMintIDInfo')}
-        </a>
-        <div className='flex items-center justify-center mt-10'>
-          <FooterSvg />
-        </div>
-        <p className="kc-footer-copyright pt-4 pb-9">{msgStr('footerCopyright')}</p>
-      </div>
-    </>
   )
 }

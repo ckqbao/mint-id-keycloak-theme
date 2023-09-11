@@ -121,31 +121,42 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
       // 	exists: (fieldName: string) => fieldName === "email"
       // },
     },
-		{
-			pageId: 'login-oauth-grant.ftl',
-			oauth: {
-				clientScopesRequested: [
-					{ consentScreenText: 'email' },
-					{ consentScreenText: 'profile' }
-				]
-			}
-		}
+    {
+      pageId: 'login-oauth-grant.ftl',
+      locale: { currentLanguageTag: 'de' },
+      oauth: {
+        clientScopesRequested: [{ consentScreenText: 'email' }, { consentScreenText: 'profile' }],
+      },
+    },
+    {
+      pageId: 'login-verify-email.ftl',
+      locale: { currentLanguageTag: 'de' },
+    },
+    { pageId: 'error.ftl', locale: { currentLanguageTag: 'de' } },
+    {
+      pageId: 'info.ftl',
+      message: {
+        summary: 'Bestätigen Sie, dass die E-Mail-Adresse baochow95@gmail.com gültig ist.',
+        type: 'success',
+      },
+    },
   ],
 })
 
 export const { kcContext } = getKcContext({
   // Uncomment to test the login page for development.
-  // mockPageId: "login.ftl",
-  // mockPageId: "login-reset-password.ftl",
-  // mockPageId: "logout-confirm.ftl",
-  // mockPageId: "register.ftl",
-  // mockPageId: "register-user-profile.ftl",
-  // mockPageId: "info.ftl",
-  // mockPageId: "terms.ftl",
-  // mockPageId: "login-verify-email.ftl",
-  // mockPageId: "login-idp-link-email.ftl"
-  // mockPageId: "login-idp-link-confirm.ftl"
-  mockPageId: 'login-oauth-grant.ftl',
+  // mockPageId: 'login.ftl',
+  // mockPageId: 'login-reset-password.ftl',
+  // mockPageId: 'logout-confirm.ftl',
+  // mockPageId: 'register.ftl',
+  // mockPageId: 'register-user-profile.ftl',
+  // mockPageId: 'info.ftl',
+  // mockPageId: 'terms.ftl',
+  // mockPageId: 'login-verify-email.ftl',
+  // mockPageId: 'login-idp-link-email.ftl',
+  // mockPageId: 'login-idp-link-confirm.ftl',
+  // mockPageId: 'login-oauth-grant.ftl',
+  mockPageId: 'error.ftl',
 })
 
 export type KcContext = NonNullable<ReturnType<typeof getKcContext>['kcContext']>

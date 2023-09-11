@@ -4,6 +4,8 @@ import type { PageProps } from "keycloakify/account";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
 
+import 'rsuite/dist/rsuite.min.css'
+
 const Template = lazy(() => import("./Template"));
 
 const Account = lazy(() => import("./pages/Account"));

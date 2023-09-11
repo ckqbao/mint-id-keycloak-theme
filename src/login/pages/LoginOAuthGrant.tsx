@@ -13,12 +13,12 @@ export default function LoginOAuthGrant(props: PageProps<Extract<KcContext, { pa
   })
 
   const { advancedMsg, msg, msgStr } = i18n
-  const { client, oauth, url } = kcContext
+  const { oauth, url } = kcContext
 
   return (
-    <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} displayMessage={false} headerNode={msg('oauthGrantTitle', client.name ?? client.clientId)}>
-      <h3 className="text-xl">{msg('oauthGrantRequest')}</h3>
-      <ul className='flex flex-col space-y-4 pt-4 pb-4'>
+    <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} displayMessage={false} headerNode={msg('oauthGrantTitle')}>
+      <h3 className="text-xl text-[#252131]">{msg('oauthGrantRequest')}</h3>
+      <ul className='flex flex-col space-y-4 pt-4 pb-4 text-[#252131]'>
         {oauth?.clientScopesRequested?.map((scope, idx) => (
           <li key={idx}>
             <span className='text-base'>

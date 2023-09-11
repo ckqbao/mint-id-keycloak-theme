@@ -62,7 +62,7 @@ html.login-pf {
 }
 
 .kcFormHeaderClass.login-pf-header h1 {
-  height: 50px;
+  /* height: 50px; */
   color: #252c30;
   font-family: "Source Sans 3";
   font-style: normal;
@@ -352,4 +352,8 @@ html.login-pf {
   font-weight: 400;
   line-height: 120%; /* 19.2px */
   letter-spacing: -0.32px;
+}
+
+#kc-info-message, #kc-error-message, #kc-terms-text, .instruction {
+  color: #252131;
 }

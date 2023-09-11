@@ -11,6 +11,7 @@ import { CheckCircleIcon, ExclamationTriangleIcon, InformationCircleIcon, XCircl
 
 import mintCampusLogo from '../assets/img/MINT-Campus-Logo.png'
 import mintVernetztLogo from '../assets/img/Mintvernetzt-Logo.png'
+import { ReactComponent as FooterSvg } from '../assets/svg/footer.svg'
 import tos_en_url from '../assets/tos_en.md'
 import tos_de_url from '../assets/tos_de.md'
 
@@ -33,9 +34,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   const { getClassName } = useGetClassName({ doUseDefaultCss, classes })
 
-  const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } = i18n
+  const { msg, msgStr } = i18n
 
-  const { realm, locale, auth, url, message, isAppInitiatedAction, pageId } = kcContext
+  const { auth, url, message, isAppInitiatedAction, pageId } = kcContext
 
   useDownloadTerms({
     kcContext,
@@ -103,27 +104,27 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
       <div className={clsx(getClassName('kcFormCardClass'), displayWide && getClassName('kcFormCardAccountClass'))}>
         <header className={getClassName('kcFormHeaderClass')}>
           {/* {realm.internationalizationEnabled && (assert(locale !== undefined), true) && locale.supported.length > 1 && (
-                        <div id="kc-locale">
-                            <div id="kc-locale-wrapper" className={getClassName("kcLocaleWrapperClass")}>
-                                <div className="kc-dropdown" id="kc-locale-dropdown">
-                                    eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                    <a href="#" id="kc-current-locale-link">
-                                        {labelBySupportedLanguageTag[currentLanguageTag]}
-                                    </a>
-                                    <ul>
-                                        {locale.supported.map(({ languageTag }) => (
-                                            <li key={languageTag} className="kc-dropdown-item">
-                                                eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                                <a href="#" onClick={() => changeLocale(languageTag)}>
-                                                    {labelBySupportedLanguageTag[languageTag]}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    )} */}
+            <div id="kc-locale">
+              <div id="kc-locale-wrapper" className={getClassName('kcLocaleWrapperClass')}>
+                <div className="kc-dropdown" id="kc-locale-dropdown">
+                  eslint-disable-next-line jsx-a11y/anchor-is-valid
+                  <a href="#" id="kc-current-locale-link">
+                    {labelBySupportedLanguageTag[currentLanguageTag]}
+                  </a>
+                  <ul>
+                    {locale.supported.map(({ languageTag }) => (
+                      <li key={languageTag} className="kc-dropdown-item">
+                        eslint-disable-next-line jsx-a11y/anchor-is-valid
+                        <a href="#" onClick={() => changeLocale(languageTag)}>
+                          {labelBySupportedLanguageTag[languageTag]}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )} */}
           {!(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
             displayRequiredFields ? (
               <div className={getClassName('kcContentWrapperClass')}>
@@ -241,6 +242,35 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
               </form>
             )}
           </div>
+        </div>
+      </div>
+      {(pageId === 'register.ftl' || pageId === 'register-user-profile.ftl') && (
+        <div className="kcRegisterBanner">
+          <span>{msgStr('registerBanner')}</span>
+          <div style={{ display: 'flex', gap: '23px', alignItems: 'center', justifyContent: 'center', marginTop: '30px', marginBottom: '45px' }}>
+            <img src={mintVernetztLogo} alt="mint-vernetzt" width="122" height="122" />
+            <img src={mintCampusLogo} alt="mint-campus" width="120" height="120" />
+          </div>
+        </div>
+      )}
+      <div className="kc-footer flex flex-col items-center mt-10 mb-10">
+        <div className="flex items-center justify-center">
+          <FooterSvg />
+        </div>
+        <p className="kc-footer-copyright pt-4 pb-9">{msgStr('footerCopyright')}</p>
+        <div className="divide-x divide-gray-500 text-center">
+          <a href="/datenschutz" target='_blank' className="px-1 text-black">
+            {msg('shortPrivacyPolicyTitle')}
+          </a>
+          <a href="/nutzungsbedingungen" target='_blank' className="px-1 text-black">
+            {msg('termsTitle')}
+          </a>
+          <a href="/faq" target='_blank' className="px-1 text-black">
+            {msg('footerMintIDInfo')}
+          </a>
+          <a href="/impressum" target='_blank' className="px-1 text-black">
+            {msg('imprintTitle')}
+          </a>
         </div>
       </div>
     </div>

@@ -5,14 +5,15 @@ import type { KcContext } from './kcContext'
 import { useI18n } from './i18n'
 
 const Template = lazy(() => import('./Template'))
-const DefaultTemplate = lazy(() => import('keycloakify/login/Template'))
 
 // You can uncomment this to see the values passed by the main app before redirecting.
 //import { foo, bar } from "./valuesTransferredOverUrl";
 //console.log(`Values passed by the main app in the URL parameter:`, { foo, bar });
 
+const Error = lazy(() => import('./pages/Error'))
 const Login = lazy(() => import('./pages/Login'))
 const LoginResetPassword = lazy(() => import('./pages/LoginResetPassword'))
+const LoginVerifyEmail = lazy(() => import('./pages/LoginVerifyEmail'))
 const LogoutConfirm = lazy(() => import('./pages/LogoutConfirm'))
 const LoginOAuthGrant = lazy(() => import('./pages/LoginOAuthGrant'))
 // If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
@@ -52,10 +53,14 @@ export default function KcApp(props: { kcContext: KcContext }) {
     <Suspense>
       {(() => {
         switch (kcContext.pageId) {
+          case 'error.ftl':
+            return <Error {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'login.ftl':
             return <Login {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'login-reset-password.ftl':
             return <LoginResetPassword {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
+          case 'login-verify-email.ftl':
+            return <LoginVerifyEmail {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'logout-confirm.ftl':
             return <LogoutConfirm {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'login-oauth-grant.ftl':
@@ -70,9 +75,8 @@ export default function KcApp(props: { kcContext: KcContext }) {
             return <MyExtraPage1 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           case 'my-extra-page-2.ftl':
             return <MyExtraPage2 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
-          // We choose to use the default Template for the Info page and to download the theme resources.
           case 'info.ftl':
-            return <Info {...{ kcContext, i18n, classes }} Template={DefaultTemplate} doUseDefaultCss={true} />
+            return <Info {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
           default:
             return <Fallback {...{ kcContext, i18n, classes }} Template={Template} doUseDefaultCss={true} />
         }
