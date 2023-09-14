@@ -4,7 +4,7 @@ import { createUseI18n } from "keycloakify/account";
 export const { useI18n } = createUseI18n({
   de: {
     deleteAccount: 'Konto löschen',
-    deleteAccountPopoverInfo: 'Du kannst Die Löschung Deiner MINT-ID per E-Mail an support@mint-id.org beauftragen. Wir nehmen die Löschung schnellstmöglich vor.'
+    deleteAccountPopoverInfo: 'Du kannst die Löschung Deiner MINT-ID per E-Mail an support@mint-id.org beauftragen. Wir nehmen die Löschung schnellstmöglich vor.'
   },
   en: {
     deleteAccount: 'Delete account',

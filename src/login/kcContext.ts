@@ -125,7 +125,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
       pageId: 'login-oauth-grant.ftl',
       locale: { currentLanguageTag: 'de' },
       oauth: {
-        clientScopesRequested: [{ consentScreenText: 'email' }, { consentScreenText: 'profile' }],
+        clientScopesRequested: [{ consentScreenText: 'emailScopeConsentText' }, { consentScreenText: 'profileScopeConsentText' }, {consentScreenText: 'rolesScopeConsentText' }],
       },
     },
     {
@@ -135,6 +135,8 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
     { pageId: 'error.ftl', locale: { currentLanguageTag: 'de' } },
     {
       pageId: 'info.ftl',
+      actionUri: undefined,
+      messageHeader: undefined,
       message: {
         summary: 'Bestätigen Sie, dass die E-Mail-Adresse baochow95@gmail.com gültig ist.',
         type: 'success',
@@ -155,8 +157,8 @@ export const { kcContext } = getKcContext({
   // mockPageId: 'login-verify-email.ftl',
   // mockPageId: 'login-idp-link-email.ftl',
   // mockPageId: 'login-idp-link-confirm.ftl',
-  // mockPageId: 'login-oauth-grant.ftl',
-  mockPageId: 'error.ftl',
+  mockPageId: 'login-oauth-grant.ftl',
+  // mockPageId: 'error.ftl',
 })
 
 export type KcContext = NonNullable<ReturnType<typeof getKcContext>['kcContext']>

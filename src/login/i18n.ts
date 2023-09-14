@@ -8,6 +8,7 @@ export const { useI18n } = createUseI18n({
   de: {
     // doLogin: "Anmelden",
     // doCancel: "Abbrechen",
+    alreadyLoggedIn: 'Du bist bereits angemeldet',
     alreadyHaveAccount: 'Bereits eine MINT-ID?',
     'error-empty': '*Bitte die Pflichtfelder ausfüllen.',
     loginTitle: 'Anmelden mit MINT-ID',
@@ -26,14 +27,19 @@ export const { useI18n } = createUseI18n({
     emailVerifyTitle: 'Neues Profil anlegen',
     emailVerifyInstruction1:
       'Dein Profil wurde erstellt. Um die Registrierung abzuschließen, bestätige bitte innerhalb von 24 Stunden den Registrierungslink in Deinen E-Mails. Bitte sieh auch in Deinem Spam-Ordner nach.',
+    emailVerifiedMessage: 'Deine E-Mail-Adresse wurde erfolgreich verifiziert.',
     oauthGrantTitle: 'Zugriff über MINT-ID bestätigen',
     oauthGrantRequest: 'Möchtest Du den Zugriff über Deine MINT-ID freigeben?',
     emailSentMessage: 'Du solltest in Kürze eine E-Mail mit weiteren Informationen erhalten.',
     errorSupportMessage: 'Falls Du Fragen hast, schreib uns gerne eine E-Mail an support@mint-id.org.',
+    confirmEmailAddressVerification: 'Bitte bestätigen, dass E-Mail-Adresse {0} gültig ist.',
+    profileScopeConsentText: 'Konto',
+    rolesScopeConsentText: 'Nutzer:innenrollen'
   },
   en: {
     // doLogin: "Login",
     // doCancel: "Cancel",
+    alreadyLoggedIn: 'You are already logged in.',
     alreadyHaveAccount: 'Already have a MINT-ID?',
     'error-empty': '*Please fill out the mandatory fields.',
     loginTitle: 'Login with MINT-ID',
@@ -52,10 +58,14 @@ export const { useI18n } = createUseI18n({
     emailVerifyTitle: 'Email verification',
     emailVerifyInstruction1:
       'Your profile has been created. To complete the registration, please confirm the registration link in your email within 24 hours. Please also check your spam folder.',
+    emailVerifiedMessage: 'Your email address has been verified.',
     oauthGrantTitle: 'Grant Access via MINT-ID',
     oauthGrantRequest: 'Would you like to grant access via MINT-ID?',
     emailSentMessage: 'You should receive an email shortly with more information.',
     errorSupportMessage: 'If you have any questions, please send us an email to support@mint-id.org.',
+    confirmEmailAddressVerification: 'Confirm validity of e-mail address {0}.',
+    profileScopeConsentText: 'User profile',
+    rolesScopeConsentText: 'User roles'
   },
   // fr: {
   //     /* spell-checker: disable */
