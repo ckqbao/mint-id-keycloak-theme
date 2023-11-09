@@ -123,10 +123,10 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
         displayInfo
         headerNode={msg('registerTitle')}
         infoNode={
-          <div id="back-to-login">
-            <span>
+          <div id="back-to-login" className='flex items-center justify-center !p-0'>
+            <span className='text-lg'>
               {msg('alreadyHaveAccount')}
-              <a href={url.loginUrl} className="kc-link ml-2">
+              <a href={url.loginUrl} className="kc-link ml-2 ">
                 {msg('doLogIn')}
               </a>
             </span>

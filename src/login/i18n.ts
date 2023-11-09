@@ -8,6 +8,7 @@ export const { useI18n } = createUseI18n({
   de: {
     // doLogin: "Anmelden",
     // doCancel: "Abbrechen",
+    doConfirm: "Bestätigen",
     alreadyLoggedIn: 'Du bist bereits angemeldet',
     alreadyHaveAccount: 'Bereits eine MINT-ID?',
     'error-empty': '*Bitte die Pflichtfelder ausfüllen.',
@@ -39,6 +40,7 @@ export const { useI18n } = createUseI18n({
   en: {
     // doLogin: "Login",
     // doCancel: "Cancel",
+    doConfirm: 'Yes',
     alreadyLoggedIn: 'You are already logged in.',
     alreadyHaveAccount: 'Already have a MINT-ID?',
     'error-empty': '*Please fill out the mandatory fields.',

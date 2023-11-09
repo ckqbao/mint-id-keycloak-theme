@@ -40,14 +40,14 @@ export default function LoginOAuthGrant(props: PageProps<Extract<KcContext, { pa
           )}
           name="accept"
           type="submit"
-          value={msgStr('doYes')}
+          value={msgStr('doConfirm')}
         />
-        <input
+        {/* <input
           className={clsx(getClassName('kcButtonClass'), getClassName('kcButtonDefaultClass'), getClassName('kcButtonLargeClass'), 'cursor-pointer')}
           name="cancel"
           type="submit"
           value={msgStr('doNo')}
-        />
+        /> */}
       </form>
       <div className="clearfix" />
     </Template>

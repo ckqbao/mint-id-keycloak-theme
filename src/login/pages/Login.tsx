@@ -49,8 +49,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: 'log
           realm.password &&
           realm.registrationAllowed &&
           !registrationDisabled && (
-            <div id="kc-registration">
-              <span>
+            <div id="kc-registration" className='flex items-center justify-center !p-0'>
+              <span className="text-lg">
                 {msg('noAccount')}
                 <a className="kc-link registerLink ml-2" tabIndex={6} href={url.registrationUrl}>
                   {msg('doRegister')}

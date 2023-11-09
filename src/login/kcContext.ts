@@ -27,7 +27,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
       pageId: 'login.ftl',
       locale: {
         //When we test the login page we do it in french
-        currentLanguageTag: 'en',
+        currentLanguageTag: 'de',
       },
       message: undefined,
       realm: {
@@ -147,7 +147,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 
 export const { kcContext } = getKcContext({
   // Uncomment to test the login page for development.
-  // mockPageId: 'login.ftl',
+  mockPageId: 'login.ftl',
   // mockPageId: 'login-reset-password.ftl',
   // mockPageId: 'logout-confirm.ftl',
   // mockPageId: 'register.ftl',
@@ -157,7 +157,7 @@ export const { kcContext } = getKcContext({
   // mockPageId: 'login-verify-email.ftl',
   // mockPageId: 'login-idp-link-email.ftl',
   // mockPageId: 'login-idp-link-confirm.ftl',
-  mockPageId: 'login-oauth-grant.ftl',
+  // mockPageId: 'login-oauth-grant.ftl',
   // mockPageId: 'error.ftl',
 })
 

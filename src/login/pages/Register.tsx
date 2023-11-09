@@ -113,8 +113,8 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: '
       displayInfo
       headerNode={msg('registerTitle')}
       infoNode={
-        <div id="back-to-login">
-          <span>
+        <div id="back-to-login" className='flex items-center justify-center !p-0'>
+          <span className='text-lg'>
             {msg('alreadyHaveAccount')}
             <a className="ml-2" href={url.loginUrl}>
               {msg('doLogIn')}
