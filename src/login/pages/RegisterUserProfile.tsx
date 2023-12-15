@@ -72,8 +72,10 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
   useEffect(() => {
     const observer = new MutationObserver((mutations, mutationInstance) => {
       const termsOfUseLink = document.querySelector<HTMLAnchorElement>('a#terms-of-use')
-      const privacyPolicy = document.querySelector<HTMLAnchorElement>('a#privacy-policy')
-      if (termsOfUseLink && privacyPolicy) {
+      const mintIdPrivacyPolicy = document.querySelector<HTMLAnchorElement>('a#MINT-ID-privacy-policy')
+      const mintCampusPrivacyPolicy = document.querySelector<HTMLAnchorElement>('a#MINTcampus-privacy-policy')
+      const mintVernetztPrivacyPolicy = document.querySelector<HTMLAnchorElement>('a#MINTvernetzt-privacy-policy')
+      if (termsOfUseLink && mintIdPrivacyPolicy && mintCampusPrivacyPolicy && mintVernetztPrivacyPolicy) {
         termsOfUseLink.setAttribute('href', '/nutzungsbedingungen')
         termsOfUseLink.setAttribute('target', '_blank')
         termsOfUseLink.style.color = '#252131'
@@ -81,12 +83,26 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
         termsOfUseLink.style.textDecoration = 'underline'
         termsOfUseLink.innerHTML = msgStr('termsTitle')
 
-        privacyPolicy.setAttribute('href', '/datenschutz')
-        privacyPolicy.setAttribute('target', '_blank')
-        privacyPolicy.style.color = '#252131'
-        privacyPolicy.style.fontWeight = 'bold'
-        privacyPolicy.style.textDecoration = 'underline'
-        privacyPolicy.innerHTML = msgStr('privacyPolicyTitle')
+        mintIdPrivacyPolicy.setAttribute('href', '/datenschutz')
+        mintIdPrivacyPolicy.setAttribute('target', '_blank')
+        mintIdPrivacyPolicy.style.color = '#252131'
+        mintIdPrivacyPolicy.style.fontWeight = 'bold'
+        mintIdPrivacyPolicy.style.textDecoration = 'underline'
+        mintIdPrivacyPolicy.innerHTML = msgStr('mintIdPrivacyPolicyTitle')
+
+        mintCampusPrivacyPolicy.setAttribute('href', '/datenschutzerklaerung')
+        mintCampusPrivacyPolicy.setAttribute('target', '_blank')
+        mintCampusPrivacyPolicy.style.color = '#252131'
+        mintCampusPrivacyPolicy.style.fontWeight = 'bold'
+        mintCampusPrivacyPolicy.style.textDecoration = 'underline'
+        mintCampusPrivacyPolicy.innerHTML = msgStr('mintCampusPrivacyPolicyTitle')
+
+        mintVernetztPrivacyPolicy.setAttribute('href', '/privacy-policy-community-platform')
+        mintVernetztPrivacyPolicy.setAttribute('target', '_blank')
+        mintVernetztPrivacyPolicy.style.color = '#252131'
+        mintVernetztPrivacyPolicy.style.fontWeight = 'bold'
+        mintVernetztPrivacyPolicy.style.textDecoration = 'underline'
+        mintVernetztPrivacyPolicy.innerHTML = msgStr('mintVernetztPrivacyPolicyTitle')
 
         mutationInstance.disconnect()
       }

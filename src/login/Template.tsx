@@ -93,7 +93,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           </div>
         )}
       </div>
-
+      {pageId === 'login.ftl' && <p className="max-w-xl mx-auto mb-5 font-normal text-lg text-black text-center">{msg('introduction')}</p>}
       {displayInfo && (
         <div id="kc-info" className={getClassName('kcSignUpClass')}>
           <div id="kc-info-wrapper" className={getClassName('kcInfoAreaWrapperClass')}>
@@ -251,6 +251,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             <img src={mintVernetztLogo} alt="mint-vernetzt" width="122" height="122" />
             <img src={mintCampusLogo} alt="mint-campus" width="120" height="120" />
           </div>
+          <p className="font-normal text-lg">{msg('introduction')}</p>
         </div>
       )}
       <div className="kc-footer flex flex-col items-center mt-10 mb-10">
@@ -259,16 +260,22 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         </div>
         <p className="kc-footer-copyright pt-4 pb-9">{msgStr('footerCopyright')}</p>
         <div className="divide-x divide-gray-500 text-center">
-          <a href="/datenschutz" target='_blank' className="px-1 text-black">
-            {msg('shortPrivacyPolicyTitle')}
+          <a href="/datenschutz" target="_blank" className="px-1 text-black">
+            {msg('footerMintIDPrivacyPolicyTitle')}
           </a>
-          <a href="/nutzungsbedingungen" target='_blank' className="px-1 text-black">
+          <a href="/datenschutzerklaerung" target="_blank" className="px-1 text-black">
+            {msg('footerMintCampusPrivacyPolicyTitle')}
+          </a>
+          <a href="/privacy-policy-community-platform" target="_blank" className="px-1 text-black">
+            {msg('footerMintVernetztPrivacyPolicyTitle')}
+          </a>
+          <a href="/nutzungsbedingungen" target="_blank" className="px-1 text-black">
             {msg('termsTitle')}
           </a>
-          <a href="/faq" target='_blank' className="px-1 text-black">
+          <a href="/faq" target="_blank" className="px-1 text-black">
             {msg('footerMintIDInfo')}
           </a>
-          <a href="/impressum" target='_blank' className="px-1 text-black">
+          <a href="/impressum" target="_blank" className="px-1 text-black">
             {msg('imprintTitle')}
           </a>
         </div>
